@@ -17,6 +17,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "goda_host_3"
   config.vm.define "goda_host_4"
   config.vm.box = "ubuntu/trusty64"
+  
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

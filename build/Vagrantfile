@@ -1,0 +1,21 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.define "goda_host_with_docker"
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.network "forwarded_port", guest: 80, host: 8030
+  config.vm.provision "shell",
+    inline: "sudo apt-get update && sudo apt update"
+    
+
+
+  ####### Provision #######
+  config.vm.provision "docker" do |docker|
+    docker.build_image "/vagrant",
+      args: "-t godaprojects/goda-first-image-inside-vm-from-vagrant"
+    docker.run "goda-first-image-inside-vm-from-vagrant",
+      image: "godaprojects/goda-first-image-inside-vm-from-vagrant",
+      args: "-p 80:80"
+  end
+end
